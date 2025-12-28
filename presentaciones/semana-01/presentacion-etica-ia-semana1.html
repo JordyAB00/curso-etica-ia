@@ -43,7 +43,7 @@
         }
 
         .slide-header {
-            margin-bottom: 25px;
+            margin-bottom: 40px;
         }
 
         .slide-title {
@@ -63,10 +63,10 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 20px;
             overflow-y: auto;
-            max-height: calc(100vh - 250px);
+            max-height: calc(100vh - 280px);
         }
 
         .content-box {
@@ -213,28 +213,18 @@
             cursor: pointer;
             font-size: 16px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
         }
 
-        .nav-button:hover {
+        .nav-button:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
         }
 
         .nav-button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-        }
-
-        .slide-number {
-            position: fixed;
-            top: 20px;
-            right: 30px;
-            color: #6e6e73;
-            font-size: 16px;
-            z-index: 1000;
-            font-weight: 500;
         }
 
         .logo-area {
@@ -247,6 +237,16 @@
         .logo-image {
             max-width: 150px;
             height: auto;
+        }
+
+        .slide-number {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            color: #6e6e73;
+            font-size: 16px;
+            z-index: 1000;
+            font-weight: 500;
         }
 
         .cover-slide {
@@ -354,219 +354,41 @@
 
     <div class="presentation-container">
         <!-- Slide 1: Portada -->
-        <div class="slide active cover-slide">
+        <div class="slide cover-slide active">
             <h1 class="cover-title">Ética y Gobernanza de Datos en IA</h1>
-            <h2 class="cover-subtitle">Semana 1: Fundamentos y casos críticos</h2>
+            <p class="cover-subtitle">Semana 1: Fundamentos y casos críticos</p>
             <div class="cover-info">
-                Microcredencial en Inteligencia Artificial y Análisis de Datos<br>
+                <p>Microcredencial en Inteligencia Artificial y Análisis de Datos<br>
                 Universidad Latinoamericana de Ciencia y Tecnología<br>
-                <strong>Diciembre 2025</strong>
+                Diciembre 2025</p>
             </div>
         </div>
 
-        <!-- Slide 2: Agenda -->
+        <!-- Slide 2: Introducción -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Agenda de la sesión</h2>
-                <p class="slide-subtitle">¿Qué vamos a explorar hoy?</p>
+                <h2 class="slide-title">Introducción a la ética y gobernanza en IA</h2>
+                <p class="slide-subtitle">¿Por qué es importante?</p>
             </div>
             <div class="slide-content">
                 <div class="content-box">
+                    <h3>Conceptos fundamentales</h3>
                     <ul>
-                        <li>Conceptos fundamentales: ética, moral y gobernanza en IA</li>
-                        <li>¿Por qué es importante la ética en IA?</li>
-                        <li>Casos de fallas éticas documentadas (2014-2025)</li>
-                        <li>Diferencia entre ética en IA y gobernanza de datos</li>
-                        <li>Panorama global: regulaciones y preocupaciones actuales</li>
-                        <li>Actividad práctica: análisis de casos reales</li>
+                        <li><strong>Ética:</strong> Principios que guían la conducta correcta y el desarrollo responsable de sistemas de IA</li>
+                        <li><strong>Moral:</strong> Conjunto de valores y normas de una sociedad que determinan lo aceptable</li>
+                        <li><strong>Gobernanza:</strong> Estructuras, políticas y mecanismos para asegurar uso ético y responsable de datos e IA</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-
-        <!-- Slide 3: Conceptos fundamentales -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Conceptos fundamentales</h2>
-                <p class="slide-subtitle">Ética, moral y gobernanza en el contexto de IA</p>
-            </div>
-            <div class="slide-content">
-                <div class="three-columns">
-                    <div class="case-card">
-                        <h4>Ética</h4>
-                        <p><strong>Naturaleza:</strong> Filosófica-reflexiva</p>
-                        <p><strong>Pregunta:</strong> ¿Por qué es esto bueno o malo?</p>
-                        <p><strong>Alcance:</strong> Universal, busca principios generales</p>
-                        <p><strong>Función:</strong> Fundamenta y cuestiona</p>
-                    </div>
-                    <div class="case-card">
-                        <h4>Moral</h4>
-                        <p><strong>Naturaleza:</strong> Normativa-social</p>
-                        <p><strong>Pregunta:</strong> ¿Qué debo hacer según mi comunidad?</p>
-                        <p><strong>Alcance:</strong> Particular, específica de cada cultura</p>
-                        <p><strong>Función:</strong> Prescribe conductas</p>
-                    </div>
-                    <div class="case-card">
-                        <h4>Gobernanza</h4>
-                        <p><strong>Naturaleza:</strong> Operacional-institucional</p>
-                        <p><strong>Pregunta:</strong> ¿Cómo implementamos lo correcto?</p>
-                        <p><strong>Alcance:</strong> Organizacional y regulatorio</p>
-                        <p><strong>Función:</strong> Operacionaliza y controla</p>
-                    </div>
-                </div>
                 <div class="highlight-box">
-                    <p>La ética fundamenta los principios, la moral los contextualiza socialmente, y la gobernanza los implementa institucionalmente.</p>
+                    <p>La ética en IA no es un obstáculo para la innovación, es la condición necesaria para una tecnología que beneficie a toda la humanidad.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 4: Framework FATE -->
+        <!-- Slide 3: Diferencia ética vs gobernanza -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Framework FATE</h2>
-                <p class="slide-subtitle">Los cuatro pilares de la ética en IA (Microsoft Research)</p>
-            </div>
-            <div class="slide-content">
-                <div class="two-columns">
-                    <div class="key-point">
-                        <h4>F - Fairness (Equidad)</h4>
-                        <p>Tratamiento imparcial de todos los individuos. Los sistemas de IA deben evitar sesgos y discriminación basada en raza, género, edad u otras características protegidas.</p>
-                    </div>
-                    <div class="key-point">
-                        <h4>A - Accountability (Responsabilidad)</h4>
-                        <p>Trazabilidad clara de decisiones algorítmicas y mecanismos de remediación cuando algo sale mal. ¿Quién responde cuando un sistema falla?</p>
-                    </div>
-                    <div class="key-point">
-                        <h4>T - Transparency (Transparencia)</h4>
-                        <p>Los usuarios tienen derecho a saber cuándo interactúan con IA y cómo funcionan los sistemas que afectan sus vidas.</p>
-                    </div>
-                    <div class="key-point">
-                        <h4>E - Ethics (Ética)</h4>
-                        <p>Alineación con derechos humanos fundamentales, dignidad y bienestar social en todo el ciclo de vida del sistema.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5: ¿Por qué es importante? -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">¿Por qué es importante la ética en IA?</h2>
-                <p class="slide-subtitle">El impacto real de fallas éticas</p>
-            </div>
-            <div class="slide-content">
-                <div class="two-columns">
-                    <div class="content-box">
-                        <h3>Consecuencias individuales</h3>
-                        <ul>
-                            <li>Discriminación en empleo y crédito</li>
-                            <li>Decisiones de justicia sesgadas</li>
-                            <li>Violaciones de privacidad</li>
-                            <li>Diagnósticos médicos incorrectos</li>
-                        </ul>
-                    </div>
-                    <div class="content-box">
-                        <h3>Consecuencias organizacionales</h3>
-                        <ul>
-                            <li>Pérdidas reputacionales masivas</li>
-                            <li>Multas regulatorias millonarias</li>
-                            <li>Pérdida de confianza del público</li>
-                            <li>Caída en valor de mercado</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="highlight-box">
-                    <p>World Economic Forum 2024: La desinformación amplificada por IA es la amenaza #1 a corto plazo a nivel global</p>
-                </div>
-                <div class="two-columns" style="margin-top: 20px;">
-                    <div class="stat-box">
-                        <div class="stat-number">$96.9B</div>
-                        <div class="stat-label">Pérdida de Alphabet tras incidente Gemini (2024)</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number">90%</div>
-                        <div class="stat-label">Contenido online podría ser sintético para 2026 (Europol)</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 6: Casos históricos parte 1 -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Casos históricos de fallas éticas</h2>
-                <p class="slide-subtitle">Amazon y COMPAS: lecciones fundamentales</p>
-            </div>
-            <div class="slide-content">
-                <div class="key-point">
-                    <h4>Amazon Hiring Algorithm (2014-2018)</h4>
-                    <p><strong>Problema:</strong> Sistema de ML penalizaba sistemáticamente CVs que contenían "women's" y degradaba a graduadas de universidades femeninas.</p>
-                    <p><strong>Causa raíz:</strong> Datos de entrenamiento reflejaban predominancia masculina histórica en roles técnicos.</p>
-                    <p><strong>Resultado:</strong> Amazon abandonó el proyecto en 2017. Catalizó debate global sobre "garbage in, garbage out".</p>
-                </div>
-                <div class="key-point">
-                    <h4>COMPAS - Evaluación de riesgo de reincidencia</h4>
-                    <p><strong>Problema:</strong> ProPublica analizó 7,000+ arrestados en Florida y reveló que acusados afroamericanos eran etiquetados como "alto riesgo" al doble de la tasa que acusados blancos.</p>
-                    <p><strong>Lección crítica:</strong> Diferentes definiciones matemáticas de "equidad" son mutuamente incompatibles. Precisión igual ≠ resultados justos.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 7: Casos históricos parte 2 -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Más casos críticos</h2>
-                <p class="slide-subtitle">Microsoft Tay y Gender Shades</p>
-            </div>
-            <div class="slide-content">
-                <div class="key-point">
-                    <h4>Microsoft Tay (2016)</h4>
-                    <p><strong>Problema:</strong> Chatbot diseñado para aprender de usuarios de Twitter generó contenido racista, antisemita y misógino en menos de 16 horas.</p>
-                    <p><strong>Causa:</strong> Trolls explotaron la función "repeat after me" para enseñarle contenido ofensivo.</p>
-                    <p><strong>Impacto:</strong> Influyó significativamente en cómo Microsoft aborda la IA desde entonces.</p>
-                </div>
-                <div class="key-point">
-                    <h4>Gender Shades (2018) - MIT Media Lab</h4>
-                    <p><strong>Hallazgo:</strong> Disparidades dramáticas en reconocimiento facial:</p>
-                    <p>• Hombres de piel clara: 0.8% error<br>
-                    • Mujeres de piel oscura: 34.7% error (variación >99%)</p>
-                    <p><strong>Resultado:</strong> IBM y Microsoft mejoraron sistemas. San Francisco y Boston prohibieron uso policial de esta tecnología.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 8: Casos 2024-2025 -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Casos recientes 2024-2025</h2>
-                <p class="slide-subtitle">Deepfakes, discriminación y responsabilidad corporativa</p>
-            </div>
-            <div class="slide-content">
-                <div class="two-columns">
-                    <div class="case-card">
-                        <h4>Mobley v. Workday (2024-2025)</h4>
-                        <p>Software de IA para selección rechazó 100+ solicitudes usando "indicadores proxy" que correlacionan con raza, edad y discapacidad. Certificación colectiva mayo 2025.</p>
-                    </div>
-                    <div class="case-card">
-                        <h4>Google Gemini (Feb 2024)</h4>
-                        <p>Sobre-corrección de sesgo generó imágenes históricamente inexactas. Alphabet perdió $96.9B en valor de mercado.</p>
-                    </div>
-                    <div class="case-card">
-                        <h4>ChatGPT y suicidio (2025)</h4>
-                        <p>Adolescente de 16 años murió tras ChatGPT proporcionarle instrucciones sobre métodos de suicidio. 7+ demandas similares presentadas.</p>
-                    </div>
-                    <div class="case-card">
-                        <h4>Taylor Swift Deepfakes (2024)</h4>
-                        <p>Imágenes pornográficas no consensuales alcanzaron 47M de vistas. Catalizó 29 leyes en 17 estados de EE.UU.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 9: Diferencia ética vs gobernanza -->
-        <div class="slide">
-            <div class="slide-header">
-                <h2 class="slide-title">Ética en IA vs. Gobernanza de datos</h2>
+                <h2 class="slide-title">Ética en IA vs. Gobernanza de datos en IA</h2>
                 <p class="slide-subtitle">Dos caras de la misma moneda</p>
             </div>
             <div class="slide-content">
@@ -581,67 +403,261 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Pregunta central</strong></td>
-                                <td>¿Es esto lo correcto?</td>
-                                <td>¿Los datos son precisos, seguros y cumplen regulaciones?</td>
+                                <td>Enfoque</td>
+                                <td>Principios y valores morales</td>
+                                <td>Estructuras organizacionales y procesos</td>
                             </tr>
                             <tr>
-                                <td><strong>Nivel de operación</strong></td>
-                                <td>Filosófico-moral</td>
-                                <td>Técnico-operacional</td>
+                                <td>Pregunta clave</td>
+                                <td>¿Qué debemos hacer?</td>
+                                <td>¿Cómo lo hacemos?</td>
                             </tr>
                             <tr>
-                                <td><strong>Enfoque</strong></td>
-                                <td>Valores, derechos, impacto social</td>
-                                <td>Calidad, seguridad, cumplimiento</td>
+                                <td>Resultado</td>
+                                <td>Lineamientos éticos y principios</td>
+                                <td>Políticas, roles, procedimientos</td>
                             </tr>
                             <tr>
-                                <td><strong>Ejemplo</strong></td>
-                                <td>¿Debe IA decidir sobre libertad condicional?</td>
-                                <td>¿Los datos de antecedentes son precisos y privados?</td>
+                                <td>Ejemplo</td>
+                                <td>Equidad, transparencia, privacidad</td>
+                                <td>Comités de ética, data stewards, auditorías</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="highlight-box" style="margin-top: 30px;">
-                    <p>La gobernanza de datos HABILITA la ética en IA. La ética en IA GUÍA qué datos deben usarse y cómo procesarlos. Ambas son indispensables.</p>
+                <div class="highlight-box">
+                    <p>La ética define el "qué" (principios), mientras que la gobernanza define el "cómo" (implementación).</p>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 10: Intersección ética-gobernanza -->
+        <!-- Slide 4: Casos de fallas éticas -->
         <div class="slide">
             <div class="slide-header">
-                <h2 class="slide-title">Áreas de intersección crítica</h2>
-                <p class="slide-subtitle">Donde la ética y la gobernanza se encuentran</p>
+                <h2 class="slide-title">Casos famosos de fallas éticas en IA</h2>
+                <p class="slide-subtitle">Lecciones aprendidas</p>
+            </div>
+            <div class="slide-content">
+                <div class="three-columns">
+                    <div class="case-card">
+                        <h4>Amazon Hiring Algorithm (2018)</h4>
+                        <p>Sistema de contratación con sesgo de género. Penalizaba CVs con la palabra "women" y favorecía candidatos masculinos.</p>
+                    </div>
+                    <div class="case-card">
+                        <h4>COMPAS (2016-presente)</h4>
+                        <p>Algoritmo de predicción de reincidencia criminal con sesgo racial. Falsos positivos más altos en afroamericanos.</p>
+                    </div>
+                    <div class="case-card">
+                        <h4>Google Gemini (2024)</h4>
+                        <p>Generación de imágenes históricas inexactas. Diversificación excesiva comprometió precisión histórica.</p>
+                    </div>
+                </div>
+                <div class="two-columns" style="margin-top: 25px;">
+                    <div class="case-card">
+                        <h4>ChatGPT y suicidio (2023)</h4>
+                        <p>Caso de joven belga Eliza: ChatGPT proporcionó respuestas que contribuyeron a decisión suicida. Falta de salvaguardas en salud mental.</p>
+                    </div>
+                    <div class="case-card">
+                        <h4>Taylor Swift deepfakes (2024)</h4>
+                        <p>Imágenes sexuales generadas con IA circularon en redes. 47M de visualizaciones antes de ser removidas. Violación de privacidad y dignidad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Impacto de las fallas -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Impacto real de las fallas éticas</h2>
+                <p class="slide-subtitle">Más allá del daño reputacional</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="content-box">
+                        <h3>Consecuencias individuales</h3>
+                        <ul>
+                            <li>Discriminación en empleo, crédito, vivienda</li>
+                            <li>Encarcelamiento injusto o condenas más severas</li>
+                            <li>Violación de privacidad y dignidad</li>
+                            <li>Daño psicológico y salud mental</li>
+                            <li>Pérdida de confianza en instituciones</li>
+                        </ul>
+                    </div>
+                    <div class="content-box">
+                        <h3>Consecuencias organizacionales</h3>
+                        <ul>
+                            <li>Daño reputacional masivo</li>
+                            <li>Pérdida de confianza del público</li>
+                            <li>Sanciones regulatorias (hasta €35M o 7% facturación)</li>
+                            <li>Demandas y litigios costosos</li>
+                            <li>Abandono de proyectos (como Amazon Hiring)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 25px;">
+                    <p>Las fallas éticas en IA no son hipotéticas: tienen consecuencias reales, medibles y a menudo devastadoras para individuos y organizaciones.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Principales preocupaciones -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Panorama global: preocupaciones éticas principales</h2>
+                <p class="slide-subtitle">Tendencias 2024-2025</p>
+            </div>
+            <div class="slide-content">
+                <div class="three-columns">
+                    <div class="stat-box">
+                        <div class="stat-number">#1</div>
+                        <div class="stat-label">Desinformación<br>(WEF 2024)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">70%</div>
+                        <div class="stat-label">Adolescentes EE.UU. usan IA generativa</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">49%</div>
+                        <div class="stat-label">Empresas sufrieron deepfakes 2024</div>
+                    </div>
+                </div>
+                <div class="two-columns" style="margin-top: 25px;">
+                    <div class="content-box">
+                        <h3>Top 5 preocupaciones globales</h3>
+                        <ul>
+                            <li>Desinformación y deepfakes</li>
+                            <li>Sesgo algorítmico y discriminación</li>
+                            <li>Privacidad y vigilancia masiva</li>
+                            <li>Impacto laboral y desempleo</li>
+                            <li>Propiedad intelectual en IA generativa</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-box">
+                        <p>El sesgo algorítmico fue incluido explícitamente como nueva preocupación formal por la OCDE en 2024, reflejando su criticidad en salud, empleo y justicia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Framework FATE -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Framework FATE</h2>
+                <p class="slide-subtitle">Principios fundamentales de ética en IA</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="content-box">
+                        <h3>Fairness (Equidad)</h3>
+                        <p>Los sistemas de IA deben tratar a todos de manera justa, sin discriminación por raza, género, edad u otras características protegidas.</p>
+                    </div>
+                    <div class="content-box">
+                        <h3>Accountability (Responsabilidad)</h3>
+                        <p>Debe existir una cadena clara de responsabilidad desde el desarrollo hasta la implementación y uso de sistemas de IA.</p>
+                    </div>
+                </div>
+                <div class="two-columns" style="margin-top: 20px;">
+                    <div class="content-box">
+                        <h3>Transparency (Transparencia)</h3>
+                        <p>Las personas tienen derecho a saber cuándo interactúan con IA y cómo funcionan los sistemas que les afectan.</p>
+                    </div>
+                    <div class="content-box">
+                        <h3>Explicability (Explicabilidad)</h3>
+                        <p>Los sistemas deben poder explicar sus decisiones de manera comprensible, especialmente en contextos críticos como salud o justicia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Beneficencia y privacidad -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Principios complementarios</h2>
+                <p class="slide-subtitle">Más allá de FATE</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-box">
+                    <h3>Beneficencia y no maleficencia</h3>
+                    <ul>
+                        <li><strong>Beneficencia:</strong> Los sistemas de IA deben diseñarse para beneficiar a las personas y la sociedad</li>
+                        <li><strong>No maleficencia:</strong> "Primero, no hacer daño" - evitar consecuencias negativas previsibles</li>
+                        <li><strong>Ejemplo:</strong> Sistemas de diagnóstico médico deben maximizar beneficios (detección temprana) mientras minimizan riesgos (falsos positivos/negativos)</li>
+                    </ul>
+                </div>
+                <div class="content-box" style="margin-top: 20px;">
+                    <h3>Privacidad y protección de datos</h3>
+                    <ul>
+                        <li>Derecho fundamental reconocido por GDPR, Ley 8968 (Costa Rica) y regulaciones globales</li>
+                        <li>Incluye: consentimiento informado, minimización de datos, propósito específico</li>
+                        <li>Técnicas clave: anonimización, seudonimización, privacy by design</li>
+                        <li>Derechos ARCO: Acceso, Rectificación, Cancelación, Oposición</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Dilemas éticos -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Dilemas éticos en IA</h2>
+                <p class="slide-subtitle">Trade-offs difíciles</p>
             </div>
             <div class="slide-content">
                 <div class="two-columns">
                     <div class="key-point">
-                        <h4>Privacidad</h4>
-                        <p><strong>Gobernanza:</strong> Implementa cifrado, anonimización, controles de acceso<br>
-                        <strong>Ética:</strong> Define qué es moralmente aceptable recolectar</p>
+                        <h4>Precisión vs. Equidad</h4>
+                        <p>Un modelo más preciso puede ser menos equitativo entre grupos. ¿Optimizamos precisión global o equidad entre subgrupos?</p>
                     </div>
                     <div class="key-point">
-                        <h4>Sesgo</h4>
-                        <p><strong>Gobernanza:</strong> Asegura diversidad y representatividad en datasets<br>
-                        <strong>Ética:</strong> Evalúa impacto discriminatorio de resultados</p>
+                        <h4>Privacidad vs. Utilidad</h4>
+                        <p>Más datos mejoran modelos pero comprometen privacidad. ¿Dónde trazamos la línea?</p>
+                    </div>
+                </div>
+                <div class="two-columns" style="margin-top: 20px;">
+                    <div class="key-point">
+                        <h4>Transparencia vs. Propiedad intelectual</h4>
+                        <p>Revelar el funcionamiento puede comprometer ventajas competitivas. ¿Cuánta transparencia es suficiente?</p>
                     </div>
                     <div class="key-point">
-                        <h4>Transparencia</h4>
-                        <p><strong>Gobernanza:</strong> Documenta linaje y transformaciones de datos<br>
-                        <strong>Ética:</strong> Exige explicabilidad de decisiones a usuarios</p>
+                        <h4>Automatización vs. Empleo</h4>
+                        <p>La eficiencia puede desplazar empleos. ¿Cómo balanceamos innovación con impacto social?</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 25px;">
+                    <p>No existen soluciones perfectas. La ética en IA requiere navegar trade-offs complejos con transparencia y responsabilidad.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Explicabilidad (XAI) -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Explainable AI (XAI)</h2>
+                <p class="slide-subtitle">Del "black box" a la transparencia</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-box">
+                    <h3>¿Por qué necesitamos explicabilidad?</h3>
+                    <p>En contextos críticos (salud, justicia, crédito), las personas tienen derecho a entender por qué un sistema tomó una decisión que les afecta.</p>
+                </div>
+                <div class="two-columns" style="margin-top: 20px;">
+                    <div class="content-box">
+                        <h3>Métodos principales</h3>
+                        <ul>
+                            <li><strong>LIME:</strong> Local Interpretable Model-agnostic Explanations</li>
+                            <li><strong>SHAP:</strong> SHapley Additive exPlanations</li>
+                            <li><strong>Attention mechanisms:</strong> Visualización de qué inputs influencian outputs</li>
+                        </ul>
                     </div>
                     <div class="key-point">
-                        <h4>Consentimiento</h4>
-                        <p><strong>Gobernanza:</strong> Gestiona permisos técnicamente<br>
-                        <strong>Ética:</strong> Establece principios de autonomía del usuario</p>
+                        <h4>Trade-off crítico</h4>
+                        <p>Modelos más complejos (deep learning) tienden a ser más precisos pero menos explicables. Modelos simples (regresión) son más explicables pero potencialmente menos precisos.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 11: Panorama global - Regulaciones -->
+        <!-- Slide 11: Panorama regulatorio -->
         <div class="slide">
             <div class="slide-header">
                 <h2 class="slide-title">Panorama regulatorio global</h2>
