@@ -55,9 +55,9 @@ Ver sílabo completo para detalles de cada semana.
 
 ## Sitio web del curso
 
-Visita el sitio web del curso: [https://[tu-usuario].github.io/curso-etica-ia](https://[tu-usuario].github.io/curso-etica-ia)
+Visita el sitio web del curso: [https://jordyab00.github.io/curso-etica-ia/](https://jordyab00.github.io/curso-etica-ia/)
 
 ## Licencia
 
-Este material es propiedad de ULACIT - Universidad Latinoamericana de Ciencia y Tecnología.  
+Este material es propiedad de Lic. Jordy Jesús Alfaro Brenes - Universidad Latinoamericana de Ciencia y Tecnología.  
 Todos los derechos reservados © 2025
