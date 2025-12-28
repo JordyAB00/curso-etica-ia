@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ética y Gobernanza de Datos en IA - Semana 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: #f5f5f7;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding: 50px 80px 140px 80px;
+            background: #f5f5f7;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .slide-header {
+            margin-bottom: 25px;
+        }
+
+        .slide-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #2d1b4e;
+            margin-bottom: 12px;
+        }
+
+        .slide-subtitle {
+            font-size: 20px;
+            color: #6e6e73;
+            font-weight: 300;
+        }
+
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 250px);
+        }
+
+        .content-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #e5e5e7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .content-box h3 {
+            font-size: 24px;
+            color: #2d1b4e;
+            margin-bottom: 12px;
+        }
+
+        .content-box p {
+            font-size: 16px;
+            color: #1d1d1f;
+            line-height: 1.5;
+        }
+
+        .content-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-box li {
+            font-size: 16px;
+            color: #1d1d1f;
+            line-height: 1.6;
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .content-box li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+            font-size: 20px;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .three-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .case-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 18px;
+            border: 1px solid #e5e5e7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(45, 27, 78, 0.15);
+            border-color: #00d4ff;
+        }
+
+        .case-card h4 {
+            font-size: 19px;
+            color: #2d1b4e;
+            margin-bottom: 8px;
+        }
+
+        .case-card p {
+            font-size: 14px;
+            color: #1d1d1f;
+            line-height: 1.4;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f0f0f2, #ffffff);
+            border-left: 4px solid #00d4ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .highlight-box p {
+            font-size: 17px;
+            color: #2d1b4e;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .comparison-table {
+            background: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #e5e5e7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(90deg, #2d1b4e, #00d4ff);
+            color: #ffffff;
+            padding: 12px;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            font-size: 14px;
+            color: #1d1d1f;
+            border-bottom: 1px solid #f5f5f7;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #7c3aed, #00d4ff);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-number {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            color: #6e6e73;
+            font-size: 16px;
+            z-index: 1000;
+            font-weight: 500;
+        }
+
+        .logo-area {
+            position: fixed;
+            top: 15px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .logo-image {
+            max-width: 150px;
+            height: auto;
+        }
+
+        .cover-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f7 50%, #ffffff 100%);
+            padding: 60px 80px 140px 80px;
+        }
+
+        .cover-title {
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #2d1b4e, #00d4ff, #2d1b4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: gradient 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cover-subtitle {
+            font-size: 32px;
+            color: #6e6e73;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .cover-info {
+            font-size: 18px;
+            color: #1d1d1f;
+            margin-top: 30px;
+            line-height: 1.6;
+        }
+
+        .stat-box {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #e5e5e7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            border-color: #00d4ff;
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.15);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #2d1b4e, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #6e6e73;
+        }
+
+        .key-point {
+            background: #ffffff;
+            border-left: 4px solid #00d4ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e5e7;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .key-point h4 {
+            color: #2d1b4e;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .key-point p {
+            color: #1d1d1f;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-area">
+        <img src="../../assets/images/logo-ulacit.png" alt="ULACIT" class="logo-image">
+    </div>
+
+    <div class="slide-number">
+        <span id="currentSlide">1</span> / <span id="totalSlides">15</span>
+    </div>
+
+    <div class="presentation-container">
+        <!-- Slide 1: Portada -->
+        <div class="slide active cover-slide">
+            <h1 class="cover-title">Ética y Gobernanza de Datos en IA</h1>
+            <h2 class="cover-subtitle">Semana 1: Fundamentos y casos críticos</h2>
+            <div class="cover-info">
+                Microcredencial en Inteligencia Artificial y Análisis de Datos<br>
+                Universidad Latinoamericana de Ciencia y Tecnología<br>
+                <strong>Diciembre 2025</strong>
+            </div>
+        </div>
+
+        <!-- Slide 2: Agenda -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Agenda de la sesión</h2>
+                <p class="slide-subtitle">¿Qué vamos a explorar hoy?</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-box">
+                    <ul>
+                        <li>Conceptos fundamentales: ética, moral y gobernanza en IA</li>
+                        <li>¿Por qué es importante la ética en IA?</li>
+                        <li>Casos de fallas éticas documentadas (2014-2025)</li>
+                        <li>Diferencia entre ética en IA y gobernanza de datos</li>
+                        <li>Panorama global: regulaciones y preocupaciones actuales</li>
+                        <li>Actividad práctica: análisis de casos reales</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Conceptos fundamentales -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Conceptos fundamentales</h2>
+                <p class="slide-subtitle">Ética, moral y gobernanza en el contexto de IA</p>
+            </div>
+            <div class="slide-content">
+                <div class="three-columns">
+                    <div class="case-card">
+                        <h4>Ética</h4>
+                        <p><strong>Naturaleza:</strong> Filosófica-reflexiva</p>
+                        <p><strong>Pregunta:</strong> ¿Por qué es esto bueno o malo?</p>
+                        <p><strong>Alcance:</strong> Universal, busca principios generales</p>
+                        <p><strong>Función:</strong> Fundamenta y cuestiona</p>
+                    </div>
+                    <div class="case-card">
+                        <h4>Moral</h4>
+                        <p><strong>Naturaleza:</strong> Normativa-social</p>
+                        <p><strong>Pregunta:</strong> ¿Qué debo hacer según mi comunidad?</p>
+                        <p><strong>Alcance:</strong> Particular, específica de cada cultura</p>
+                        <p><strong>Función:</strong> Prescribe conductas</p>
+                    </div>
+                    <div class="case-card">
+                        <h4>Gobernanza</h4>
+                        <p><strong>Naturaleza:</strong> Operacional-institucional</p>
+                        <p><strong>Pregunta:</strong> ¿Cómo implementamos lo correcto?</p>
+                        <p><strong>Alcance:</strong> Organizacional y regulatorio</p>
+                        <p><strong>Función:</strong> Operacionaliza y controla</p>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p>La ética fundamenta los principios, la moral los contextualiza socialmente, y la gobernanza los implementa institucionalmente.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Framework FATE -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Framework FATE</h2>
+                <p class="slide-subtitle">Los cuatro pilares de la ética en IA (Microsoft Research)</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="key-point">
+                        <h4>F - Fairness (Equidad)</h4>
+                        <p>Tratamiento imparcial de todos los individuos. Los sistemas de IA deben evitar sesgos y discriminación basada en raza, género, edad u otras características protegidas.</p>
+                    </div>
+                    <div class="key-point">
+                        <h4>A - Accountability (Responsabilidad)</h4>
+                        <p>Trazabilidad clara de decisiones algorítmicas y mecanismos de remediación cuando algo sale mal. ¿Quién responde cuando un sistema falla?</p>
+                    </div>
+                    <div class="key-point">
+                        <h4>T - Transparency (Transparencia)</h4>
+                        <p>Los usuarios tienen derecho a saber cuándo interactúan con IA y cómo funcionan los sistemas que afectan sus vidas.</p>
+                    </div>
+                    <div class="key-point">
+                        <h4>E - Ethics (Ética)</h4>
+                        <p>Alineación con derechos humanos fundamentales, dignidad y bienestar social en todo el ciclo de vida del sistema.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: ¿Por qué es importante? -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">¿Por qué es importante la ética en IA?</h2>
+                <p class="slide-subtitle">El impacto real de fallas éticas</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="content-box">
+                        <h3>Consecuencias individuales</h3>
+                        <ul>
+                            <li>Discriminación en empleo y crédito</li>
+                            <li>Decisiones de justicia sesgadas</li>
+                            <li>Violaciones de privacidad</li>
+                            <li>Diagnósticos médicos incorrectos</li>
+                        </ul>
+                    </div>
+                    <div class="content-box">
+                        <h3>Consecuencias organizacionales</h3>
+                        <ul>
+                            <li>Pérdidas reputacionales masivas</li>
+                            <li>Multas regulatorias millonarias</li>
+                            <li>Pérdida de confianza del público</li>
+                            <li>Caída en valor de mercado</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p>World Economic Forum 2024: La desinformación amplificada por IA es la amenaza #1 a corto plazo a nivel global</p>
+                </div>
+                <div class="two-columns" style="margin-top: 20px;">
+                    <div class="stat-box">
+                        <div class="stat-number">$96.9B</div>
+                        <div class="stat-label">Pérdida de Alphabet tras incidente Gemini (2024)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">90%</div>
+                        <div class="stat-label">Contenido online podría ser sintético para 2026 (Europol)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Casos históricos parte 1 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Casos históricos de fallas éticas</h2>
+                <p class="slide-subtitle">Amazon y COMPAS: lecciones fundamentales</p>
+            </div>
+            <div class="slide-content">
+                <div class="key-point">
+                    <h4>Amazon Hiring Algorithm (2014-2018)</h4>
+                    <p><strong>Problema:</strong> Sistema de ML penalizaba sistemáticamente CVs que contenían "women's" y degradaba a graduadas de universidades femeninas.</p>
+                    <p><strong>Causa raíz:</strong> Datos de entrenamiento reflejaban predominancia masculina histórica en roles técnicos.</p>
+                    <p><strong>Resultado:</strong> Amazon abandonó el proyecto en 2017. Catalizó debate global sobre "garbage in, garbage out".</p>
+                </div>
+                <div class="key-point">
+                    <h4>COMPAS - Evaluación de riesgo de reincidencia</h4>
+                    <p><strong>Problema:</strong> ProPublica analizó 7,000+ arrestados en Florida y reveló que acusados afroamericanos eran etiquetados como "alto riesgo" al doble de la tasa que acusados blancos.</p>
+                    <p><strong>Lección crítica:</strong> Diferentes definiciones matemáticas de "equidad" son mutuamente incompatibles. Precisión igual ≠ resultados justos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Casos históricos parte 2 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Más casos críticos</h2>
+                <p class="slide-subtitle">Microsoft Tay y Gender Shades</p>
+            </div>
+            <div class="slide-content">
+                <div class="key-point">
+                    <h4>Microsoft Tay (2016)</h4>
+                    <p><strong>Problema:</strong> Chatbot diseñado para aprender de usuarios de Twitter generó contenido racista, antisemita y misógino en menos de 16 horas.</p>
+                    <p><strong>Causa:</strong> Trolls explotaron la función "repeat after me" para enseñarle contenido ofensivo.</p>
+                    <p><strong>Impacto:</strong> Influyó significativamente en cómo Microsoft aborda la IA desde entonces.</p>
+                </div>
+                <div class="key-point">
+                    <h4>Gender Shades (2018) - MIT Media Lab</h4>
+                    <p><strong>Hallazgo:</strong> Disparidades dramáticas en reconocimiento facial:</p>
+                    <p>• Hombres de piel clara: 0.8% error<br>
+                    • Mujeres de piel oscura: 34.7% error (variación >99%)</p>
+                    <p><strong>Resultado:</strong> IBM y Microsoft mejoraron sistemas. San Francisco y Boston prohibieron uso policial de esta tecnología.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Casos 2024-2025 -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Casos recientes 2024-2025</h2>
+                <p class="slide-subtitle">Deepfakes, discriminación y responsabilidad corporativa</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="case-card">
+                        <h4>Mobley v. Workday (2024-2025)</h4>
+                        <p>Software de IA para selección rechazó 100+ solicitudes usando "indicadores proxy" que correlacionan con raza, edad y discapacidad. Certificación colectiva mayo 2025.</p>
+                    </div>
+                    <div class="case-card">
+                        <h4>Google Gemini (Feb 2024)</h4>
+                        <p>Sobre-corrección de sesgo generó imágenes históricamente inexactas. Alphabet perdió $96.9B en valor de mercado.</p>
+                    </div>
+                    <div class="case-card">
+                        <h4>ChatGPT y suicidio (2025)</h4>
+                        <p>Adolescente de 16 años murió tras ChatGPT proporcionarle instrucciones sobre métodos de suicidio. 7+ demandas similares presentadas.</p>
+                    </div>
+                    <div class="case-card">
+                        <h4>Taylor Swift Deepfakes (2024)</h4>
+                        <p>Imágenes pornográficas no consensuales alcanzaron 47M de vistas. Catalizó 29 leyes en 17 estados de EE.UU.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Diferencia ética vs gobernanza -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Ética en IA vs. Gobernanza de datos</h2>
+                <p class="slide-subtitle">Dos caras de la misma moneda</p>
+            </div>
+            <div class="slide-content">
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aspecto</th>
+                                <th>Ética en IA</th>
+                                <th>Gobernanza de datos en IA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Pregunta central</strong></td>
+                                <td>¿Es esto lo correcto?</td>
+                                <td>¿Los datos son precisos, seguros y cumplen regulaciones?</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nivel de operación</strong></td>
+                                <td>Filosófico-moral</td>
+                                <td>Técnico-operacional</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Enfoque</strong></td>
+                                <td>Valores, derechos, impacto social</td>
+                                <td>Calidad, seguridad, cumplimiento</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ejemplo</strong></td>
+                                <td>¿Debe IA decidir sobre libertad condicional?</td>
+                                <td>¿Los datos de antecedentes son precisos y privados?</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p>La gobernanza de datos HABILITA la ética en IA. La ética en IA GUÍA qué datos deben usarse y cómo procesarlos. Ambas son indispensables.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Intersección ética-gobernanza -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Áreas de intersección crítica</h2>
+                <p class="slide-subtitle">Donde la ética y la gobernanza se encuentran</p>
+            </div>
+            <div class="slide-content">
+                <div class="two-columns">
+                    <div class="key-point">
+                        <h4>Privacidad</h4>
+                        <p><strong>Gobernanza:</strong> Implementa cifrado, anonimización, controles de acceso<br>
+                        <strong>Ética:</strong> Define qué es moralmente aceptable recolectar</p>
+                    </div>
+                    <div class="key-point">
+                        <h4>Sesgo</h4>
+                        <p><strong>Gobernanza:</strong> Asegura diversidad y representatividad en datasets<br>
+                        <strong>Ética:</strong> Evalúa impacto discriminatorio de resultados</p>
+                    </div>
+                    <div class="key-point">
+                        <h4>Transparencia</h4>
+                        <p><strong>Gobernanza:</strong> Documenta linaje y transformaciones de datos<br>
+                        <strong>Ética:</strong> Exige explicabilidad de decisiones a usuarios</p>
+                    </div>
+                    <div class="key-point">
+                        <h4>Consentimiento</h4>
+                        <p><strong>Gobernanza:</strong> Gestiona permisos técnicamente<br>
+                        <strong>Ética:</strong> Establece principios de autonomía del usuario</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Panorama global - Regulaciones -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Panorama regulatorio global</h2>
+                <p class="slide-subtitle">Estado actual diciembre 2025</p>
+            </div>
+            <div class="slide-content">
+                <div class="key-point">
+                    <h4>EU AI Act (vigente desde agosto 2024)</h4>
+                    <p>Sistema de clasificación por riesgo: inaceptable, alto, limitado, mínimo. Sanciones: hasta €35M o 7% de facturación global. Aplicación completa: agosto 2026.</p>
+                </div>
+                <div class="key-point">
+                    <h4>Estados Unidos (2025)</h4>
+                    <p>Giro significativo: revocación de Orden Ejecutiva de Biden. Enfoque de mínima regulación federal. Única ley federal: TAKE IT DOWN Act (criminaliza deepfakes no consensuales).</p>
+                </div>
+                <div class="key-point">
+                    <h4>China</h4>
+                    <p>AI Safety Governance Framework 2.0 (sept 2025). Etiquetado obligatorio de contenido AI. Plan de Acción Global de Gobernanza de IA (julio 2025).</p>
+                </div>
+                <div class="key-point">
+                    <h4>América Latina</h4>
+                    <p>Brasil: Ley de IA (dic 2024). Perú: primera ley de IA regional. Chile lidera en preparación. IA representará 5.4% del PIB regional para 2030.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Costa Rica pionero -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Costa Rica: pionero centroamericano</h2>
+                <p class="slide-subtitle">Estrategia Nacional de IA 2024-2027</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-box">
+                    <h3>Hitos históricos</h3>
+                    <ul>
+                        <li>Primer país de Centroamérica y el Caribe con Estrategia Nacional de IA (octubre 2024)</li>
+                        <li>Co-facilita (con España) el Diálogo Global sobre Gobernanza de IA en ONU</li>
+                        <li>Estrategia alineada con Recomendación UNESCO y Principios OCDE</li>
+                    </ul>
+                </div>
+                <div class="two-columns" style="margin-top: 30px;">
+                    <div class="content-box">
+                        <h3>7 Principios rectores</h3>
+                        <ul>
+                            <li>Paz y dignidad humana</li>
+                            <li>Supervisión humana</li>
+                            <li>Transparencia y explicabilidad</li>
+                            <li>Equidad y no discriminación</li>
+                            <li>Responsabilidad</li>
+                            <li>Sostenibilidad y bienestar</li>
+                            <li>Seguridad de la información</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-box">
+                        <p>"Estamos muy felices de que Costa Rica sea pionero en la región de Centroamérica en la elaboración de una política de inteligencia artificial ética, justa, al servicio de la sociedad."</p>
+                        <p style="font-size: 16px; margin-top: 10px;">— Gabriela Ramos, Directora General Adjunta UNESCO</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Preocupaciones actuales -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Principales preocupaciones éticas actuales</h2>
+                <p class="slide-subtitle">Diciembre 2025</p>
+            </div>
+            <div class="slide-content">
+                <div class="three-columns">
+                    <div class="stat-box">
+                        <div class="stat-number">#1</div>
+                        <div class="stat-label">Desinformación y deepfakes (WEF 2024)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">487</div>
+                        <div class="stat-label">Ataques deepfakes en Q2 2025 (+41% vs Q1)</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">400%</div>
+                        <div class="stat-label">Aumento deepfakes CSAM (H1 2025 vs 2024)</div>
+                    </div>
+                </div>
+                <div class="two-columns" style="margin-top: 30px;">
+                    <div class="case-card">
+                        <h4>Sesgo algorítmico</h4>
+                        <p>Crítico en salud, empleo y justicia. OCDE 2024 incluyó explícitamente como nueva preocupación formal. Requiere "algovigilancia" continua.</p>
+                    </div>
+                    <div class="case-card">
+                        <h4>Privacidad y vigilancia</h4>
+                        <p>49% de empresas experimentaron deepfakes audio/video en 2024. Balance innovación vs. protección sin resolver.</p>
+                    </div>
+                    <div class="case-card">
+                        <h4>Impacto laboral</h4>
+                        <p>OIT y FMI señalan transformación disruptiva. Principios OCDE enfatizan derechos laborales en automatización.</p>
+                    </div>
+                    <div class="case-card">
+                        <h4>IA generativa</h4>
+                        <p>70% adolescentes EE.UU. y 80% UK la usan. Preocupaciones sobre propiedad intelectual y datos de entrenamiento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Actividad -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Actividad práctica</h2>
+                <p class="slide-subtitle">Análisis de casos reales</p>
+            </div>
+            <div class="slide-content">
+                <div class="content-box">
+                    <h3>Instrucciones</h3>
+                    <p>En equipos, seleccionen uno de los casos presentados y analicen:</p>
+                    <ul>
+                        <li>¿Cuáles fueron los dilemas éticos presentes?</li>
+                        <li>¿Qué principios del framework FATE fueron violados?</li>
+                        <li>¿Cuáles fueron las causas raíz del problema?</li>
+                        <li>¿Qué stakeholders fueron afectados y cómo?</li>
+                        <li>¿Qué controles de gobernanza de datos faltaron?</li>
+                        <li>¿Qué recomendaciones habrían prevenido el incidente?</li>
+                    </ul>
+                </div>
+                <div class="two-columns" style="margin-top: 30px;">
+                    <div class="case-card">
+                        <h4>Casos disponibles</h4>
+                        <p>• Amazon Hiring Algorithm<br>
+                        • COMPAS<br>
+                        • Google Gemini<br>
+                        • ChatGPT y suicidio<br>
+                        • Taylor Swift deepfakes</p>
+                    </div>
+                    <div class="case-card">
+                        <h4>Formato de entrega</h4>
+                        <p>• Documento: 3-5 páginas<br>
+                        • Presentación oral: 7-10 min<br>
+                        • Aplicar marcos teóricos estudiados<br>
+                        • Mínimo 3 referencias APA 7</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Conclusión -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">Conclusiones clave</h2>
+                <p class="slide-subtitle">Hacia una IA ética y bien gobernada</p>
+            </div>
+            <div class="slide-content">
+                <div class="key-point">
+                    <h4>La ética y la gobernanza no son obstáculos, son condiciones necesarias</h4>
+                    <p>Para una IA que beneficie a la humanidad, debemos integrar reflexión ética, marcos de gobernanza robustos y mecanismos de rendición de cuentas desde el diseño inicial.</p>
+                </div>
+                <div class="key-point">
+                    <h4>Las fallas éticas tienen consecuencias reales</h4>
+                    <p>No son hipotéticas: afectan empleos, dignidad, salud mental y procesos democráticos. Los casos documentados muestran patrones recurrentes que podemos prevenir.</p>
+                </div>
+                <div class="key-point">
+                    <h4>Costa Rica lidera en la región</h4>
+                    <p>Como pionero centroamericano, tenemos la oportunidad única de estudiar cómo principios internacionales se adaptan a realidades locales.</p>
+                </div>
+                <div class="highlight-box">
+                    <p style="text-align: center; font-size: 24px;">El futuro de la IA depende de las decisiones éticas que tomemos hoy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">← Anterior</button>
+        <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Siguiente →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (n >= totalSlides) {
+                currentSlide = totalSlides - 1;
+            } else if (n < 0) {
+                currentSlide = 0;
+            } else {
+                currentSlide = n;
+            }
+            
+            slides[currentSlide].classList.add('active');
+            document.getElementById('currentSlide').textContent = currentSlide + 1;
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeSlide(1);
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
