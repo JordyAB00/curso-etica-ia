@@ -66,7 +66,27 @@
             justify-content: flex-start;
             gap: 20px;
             overflow-y: auto;
-            max-height: calc(100vh - 280px);
+            overflow-x: hidden;
+            max-height: calc(100vh - 260px);
+            padding-right: 10px;
+        }
+        
+        .slide-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .slide-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .slide-content::-webkit-scrollbar-thumb {
+            background: #00d4ff;
+            border-radius: 10px;
+        }
+        
+        .slide-content::-webkit-scrollbar-thumb:hover {
+            background: #00b8dd;
         }
 
         .content-box {
@@ -1023,7 +1043,7 @@
                     </div>
                 </div>
             </div>
-        </slide>
+        </div>
 
         <!-- Slide 20: Conflictos fundamentales -->
         <div class="slide">
